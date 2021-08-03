@@ -1,43 +1,43 @@
 """Posts views"""
 
 #django
-from django.http import HttpResponse
+from django.shortcuts import render
 
 #utilities
 from datetime import datetime
 
 posts = [
     {
-        'name': 'Mont blanc',
-        'user': 'Yoleisy Orduz',
-        'timestamp': datetime.now(),
-        'time': datetime.now().strftime('%b %dth, %Y - %H-%M hrs'),
-        'picture':'https://picsum.photos/id/784/200/200'
-
+        'title': 'Mont Blanc',
+        'user': {
+            'name': 'Yésica Cortés',
+            'picture': 'https://picsum.photos/60/60/?image=1027'
+        },
+        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
+        'photo': 'https://picsum.photos/800/600?image=1036',
     },
     {
-        'name': 'Khe.',
-        'user': 'Pink Woman',
-        'timestamp': datetime.now(),
-        'time': datetime.now().strftime('%b %dth, %Y - %H-%M hrs'),
-        'picture': 'https://picsum.photos/id/84/200/200'
+        'title': 'Via Láctea',
+        'user': {
+            'name': 'Christian Van der Henst',
+            'picture': 'https://picsum.photos/60/60/?image=1005'
+        },
+        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
+        'photo': 'https://picsum.photos/800/800/?image=903',
     },
     {
-        'name': 'Nautural web.',
-        'user': 'Pancho Villa',
-        'timestamp': datetime.now(),
-        'time': datetime.now().strftime('%b %dth, %Y - %H-%M hrs'),
-        'picture': 'https://picsum.photos/id/784/200/200'
-    },
+        'title': 'Nuevo auditorio',
+        'user': {
+            'name': 'Uriel (thespianartist)',
+            'picture': 'https://picsum.photos/60/60/?image=883'
+        },
+        'timestamp': datetime.now().strftime('%b %dth, %Y - %H:%M hrs'),
+        'photo': 'https://picsum.photos/500/700/?image=1076',
+    }
 ]
+
 
 def list_posts(request):
     """ List existing posts"""
-    content = []
-    for post in posts:
-        content.append(f""" 
-        <p><strong>{post['name']}</strong></p>
-        <p><small>{post['user']} - <i> {post['timestamp']} </i> </small></p>
-        <figure><img src="{post['picture']}"/></figure>
-        """)
-    return HttpResponse('<br>'.join(content))
+
+    return render(request,'feed.html', {'posts':posts})
