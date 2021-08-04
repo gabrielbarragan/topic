@@ -2,9 +2,11 @@
 
 from django.http import HttpResponse
 from django.http import JsonResponse
+import json
 
 #utilities
 from datetime import datetime
+
 
 def hello_world(request):
     """ Return a time of server"""
@@ -13,22 +15,22 @@ def hello_world(request):
     return HttpResponse(f'Oh, hi! Current server time is {now}')
 
 
-def hi(request):
-    """Hi."""
-    numbers_list_sorted = sorted([int(number) for number in request.GET['numbers'].split(',')])
-        
-    response = JsonResponse({'"numbers"': numbers_list_sorted})
-
-    return HttpResponse(response)
-
-def ciao(request):
-    """ciao."""
-
-    dict_numbers = { 
-        keys: sorted([int(number) if number.isdigit() else number for number in values.split(',') ])
-         for keys, values in request.GET.items() 
-         }
+def challenge_sol_teacher(request):
     
-    response = JsonResponse(dict_numbers)
+    numbers = [int(number) for number in request.GET['numbers'].split(',')]
+    sorted_nums = sorted(numbers)
+    data = {
+        'satus': 'ok',
+        'numbers': sorted_nums,
+        'message': 'Integers sorted successfully.'
+        }
+    return JsonResponse(data)
 
-    return HttpResponse(response)
+def say_hi(request, name, age):
+    """Return a greeting"""
+    if age < 12:
+        message = f'sorry {name}, you are not allowed here.'
+    else:
+        message = f'Hi! {name}, Welcome to Platzigram.'
+    
+    return HttpResponse(message)
