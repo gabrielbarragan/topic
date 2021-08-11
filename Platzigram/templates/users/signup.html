@@ -1,0 +1,52 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+    <title>Platzigram signup</title>
+{% endblock %}
+
+{% block container  %}
+    
+    <main class="form-signin container ">
+
+        {% if error %}
+          <p class="alert alert-danger"> {{error}}</p>
+        {% endif %}
+
+        <form action="{% url "signup"  %}" method="post">
+            
+            {% csrf_token %} <!--token for secure auntenticated -->
+
+            <h1 class="h3 mb-3 fw-normal">Sign up!</h1>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="text" placeholder="Username" name="username" required="true"/>
+                <label for="floatingInput">Username</label>
+            </div>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="email" placeholder="email address" name="email" required="true"/>
+                <label for="floatingInput">E-mail address</label>
+            </div>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="text" placeholder="Your first name" name="first_name" required="true"/>
+                <label for="floatingInput">First Name</label>
+            </div>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="text" placeholder="Your last name" name="last_name" required="true"/>
+                <label for="floatingInput">Last Name</label>
+            </div>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="password" placeholder="Password" name="password" required="true"/>
+                <label for="floatingInput">Password</label>
+            </div>
+            <div class="form-floating pb-2">
+                <input class="form-control" type="password" placeholder="confirm password" name="confirm_password" required="true"/>
+                <label for="floatingInput">Confirm password</label>
+            </div>
+
+
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+        
+        </form>
+    </main>
+
+{% endblock %}
