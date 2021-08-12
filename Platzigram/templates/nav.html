@@ -11,7 +11,11 @@
 
                 <li class="nav-item">
                     <a href="">
-                        <img src="{% static 'img/default-profile.png' %}" height="35" class="d-inline-block align-top rounded-circle"/>
+                    {% if profile.picture %}
+                        <img src="{{ profile.picture.url }}" class="rounded-circle mb-2 border border-4" height="45" />
+                    {% else%}
+                        <img src="{% static 'img/default-profile.png' %}" class="rounded-circle mb-2 border border-4" height="45" />
+                    {% endif %}
                     </a>
                 </li>
 

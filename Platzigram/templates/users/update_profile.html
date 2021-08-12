@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block head_content %}
+<title>@{{ request.user.username }} | Update profile</title>
+{% endblock %}
+
+{% block container %}
+
+<div class="container mt-5">
+    
+    <div class="row  justify-content-md-center">
+
+      <div class="col col-lg-2 col-12">
+        <div class="media ">
+            {% if profile.picture %}
+                <img src="{{ profile.picture.url }}" class="rounded-circle mb-2 border border-4" height="100" />
+            {% else%}
+                <img src="{% static 'img/default-profile.png' %}" class="rounded-circle mb-2 border border-4" height="100" />
+            {% endif %}
+
+            <div class="media-body">
+                <h5 class="ml-4">@{{ user.username }}</h5> <p>{{ user.get_full_name }}</p>
+            </div>
+        </div>
+      </div>
+      
+      <div class="col col-lg-8 col-12">
+        <div class="col-8 p-4 ml-2" id="profile-box">
+
+            <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data" >
+                {% csrf_token %}
+
+                {% if form.errors %}
+                  <p class="alert alert-danger"> {{form.errors}} </p>
+                {% endif %} 
+
+                <h3 class="h3">Edit profile</h3>
+
+                <hr>
+
+                <div class="form-group mb-2">
+                    <label for="formFileSm" class="form-label">Change profile photo</label>
+                    <input class="form-control form-control-sm" type="file" name="picture" id="formFileSm" required="true">
+                </div>
+
+                <div class="form-group mb-2">
+                    <label>Website</label>
+                    <input
+                        class="form-control"
+                        type="url"
+                        name="website"
+                        placeholder="Website"
+                        value="{{ profile.website }}"
+                    />
+                </div>
+
+                <div class="form-group mb-2">
+                    <label>Biography</label>
+                    <textarea class="form-control" name="biography">{{ profile.biography }}</textarea>
+                </div>
+
+                <div class="form-group mb-2">
+                    <label>Phone number</label>
+                    <input
+                        class="form-control"
+                        type="text"
+                        name="phone_number"
+                        placeholder="Phone number"
+                        value="{{ profile.phone_number }}"
+                    />
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block mt-5">Update info</button>
+            </form>
+        </div>
+      </div>
+      <div class="col col-lg-2 col-12"></div>
+    </div>
+  </div>
+    
+
+{% endblock %}
