@@ -44,6 +44,7 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
+
 def signup(request):
     """ signup view"""
 
@@ -75,6 +76,8 @@ def signup(request):
 
     return render(request, 'users/signup.html')
 
+
+@login_required
 def update_profile(request):
     """Update a user´s profile view"""
 

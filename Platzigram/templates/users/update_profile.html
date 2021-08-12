@@ -32,44 +32,71 @@
             <form action="{% url 'update_profile' %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
 
-                {% if form.errors %}
-                  <p class="alert alert-danger"> {{form.errors}} </p>
-                {% endif %} 
-
                 <h3 class="h3">Edit profile</h3>
 
                 <hr>
-
-                <div class="form-group mb-2">
-                    <label for="formFileSm" class="form-label">Change profile photo</label>
-                    <input class="form-control form-control-sm" type="file" name="picture" id="formFileSm" required="true">
+                {# picture field #}
+                <div class="form-group">
+                    <label for="formFileSm" class="form-label ">Change profile photo</label>
+                    <input class="form-control form-control-sm" type="file" name="picture" id="formFileSm">
                 </div>
+                <p class="text-danger fs-6 ">
+                    {% for error in form.picture.errors %} 
+                    <b>Picture:</b>{{error}}
+                    {% endfor %}
+                </p>
 
+                {# website field #}
                 <div class="form-group mb-2">
                     <label>Website</label>
                     <input
-                        class="form-control"
-                        type="url"
+                        class="form-control {% if form.website.errors %}is-invalid{%endif%}"
+                        type="text"
                         name="website"
                         placeholder="Website"
-                        value="{{ profile.website }}"
+                        value="{% if form.website.errors %}{{form.website.value}}{% else %}{{profile.website}}{% endif %}"
                     />
+                    <span class="invalid-feedback">
+                      {% for error in form.website.errors %} 
+                        {{error}}
+                      {% endfor %}
+                    </span>
                 </div>
-
+                
+                {# Biography field #}
                 <div class="form-group mb-2">
                     <label>Biography</label>
-                    <textarea class="form-control" name="biography">{{ profile.biography }}</textarea>
+                    <textarea 
+                    class="form-control 
+                    {% if form.biography.errors %}
+                      is-invalid
+                    {%endif%}"
+                    name="biography">{% if form.biography.errors %}{{form.biography.value}}{% else %}{{profile.biography}}{% endif %}</textarea>
+                    <span class="invalid-feedback">
+                      {% for error in form.biography.errors %} 
+                        {{error}}
+                      {% endfor %}
+                    </span>
                 </div>
 
+                {# Phone number field #}
                 <div class="form-group mb-2">
                     <label>Phone number</label>
                     <input
-                        class="form-control"
+                        class="form-control 
+                        {% if form.phone_number.errors %}
+                          is-invalid
+                        {%endif%}"
                         type="text"
                         name="phone_number"
                         placeholder="Phone number"
-                        value="{{ profile.phone_number }}"
+                        value="{% if form.phone_number.errors %}{{form.phone_number.value}}{% else %}{{profile.phone_number}}{% endif %}"
                     />
+                    <span class="invalid-feedback">
+                      {% for error in form.phone_number.errors %} 
+                        {{error}}
+                      {% endfor %}
+                    </span>
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block mt-5">Update info</button>
