@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 
 </head>
-<body class="h-100">
+<body class="d-flex flex-column justify-content-between h-100">
     
-    <div class="container h-100 mt-3">
-        <div class="row h-100 justify-content-center align-items-center">
-            <div class=" col-sm-12 col-md-8 col-lg-5 col-xl-4 pt-2 pl-5 pr-5 pb-5" id="auth-container">
+    <div class="container p-4">
+        <div class="row justify-content-center">
+            <div class=" col-sm-12 col-md-8 col-lg-5 col-xl-4 py-4" id="auth-container">
 
                 <img src="{% static "img/instagram.png" %}" class="img-fluid rounded mx-auto d-block pb-4" style="max-width: 60%;">
 
@@ -23,6 +23,6 @@
             </div>
         </div>
     </div>
-
+    {% include 'footer.html' %}
 </body>
 </html>

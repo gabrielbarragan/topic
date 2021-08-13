@@ -4,10 +4,11 @@
     <title>Platzigram login</title>
  {% endblock %}
 
+
  {% block container %}
 
 
-    <main class="form-signin container">
+    <div class="form-signin container px-5 py-1">
         {% if error %}
             <p class="alert alert-danger"> {{error}}</p>
         {% endif %}
@@ -35,6 +36,10 @@
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sing in</button>
         
         </form>
-    </main>
+        <p class="mt-4">
+            Don't have an account yet? <a href="{% url 'signup' %}"> Sing up here.</a>
+        </p>
+    </div>
+
 
  {% endblock %}
