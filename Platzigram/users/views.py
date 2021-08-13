@@ -5,14 +5,14 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 #exceptions
-from django.db.utils import IntegrityError
+
 
 #models 
 from django.contrib.auth.models import User
 from users.models import Profile
 
 #forms 
-from users.forms import ProfileForm
+from users.forms import ProfileForm, signupForm
 
 
 def login_view(request):
@@ -47,34 +47,20 @@ def logout_view(request):
 
 def signup(request):
     """ signup view"""
-
     if request.method == 'POST':
-      username = request.POST['username']
-      password = request.POST['password']
-      confirm_password = request.POST['confirm_password']
-      email = request.POST['email']
-      first_name = request.POST['first_name']
-      last_name = request.POST['last_name']
-
-      if password != confirm_password:
-          return render(request, 'users/signup.html',{'error': 'password confirmation does not match'})
-      try:
-          user = User.objects.create_user(username=username, password=password)
-
-      except IntegrityError:
-          return render(request, 'users/signup.html', {'error': f'User {username} already in use'})
-      
-      user.first_name = first_name
-      user.last_name = last_name
-      user.email = email
-      
-      user.save()
-
-      profile = Profile(user=user)
-      profile.save()
-      return redirect('login')
-
-    return render(request, 'users/signup.html')
+        form = signupForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form= signupForm()
+    return render(
+        request= request,
+        template_name= 'users/signup.html',
+        context={
+            'form':form
+        }
+    )
 
 
 @login_required
