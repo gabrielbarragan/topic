@@ -6,31 +6,14 @@
 
 {% block container %}
     <div class="container">
-        <div class="row">
-
+        <div class="row pt-4">
+            
             {% for post in posts %}
-            <div class="col-sm-12 col-md-8 offset-md-2 mt-5 p-0 post-container">
-                <div class="media p-3">
-                    <a style="text-decoration: none; color: black;" href="{% url 'users:detail' post.user.get_username%}" >
-                        <img 
-                        class="mr-3 rounded-circle" 
-                        height="35" 
-                        src="{{ post.user.profile.picture.url }}" 
-                        alt="{{ post.user.get_full_name }}"
-                        ><b class="m-1">{{ post.user.get_full_name  }}</b></a>
-                    
-                </div>
-                    <img style="width: 100%;" src="{{ post.photo.url }}" alt="{{ post.title }}">
-                <p class="pt-2 p-3 pb-1" >
-                    <a href="" class="link-secondary">
-                        <i class="far fa-heart" ></i></a>
-                    30 likes
-                </p>
-                <p class="pt-0 p-3 pb-1">
-                    <b>{{ post.title }}</b> - <small>{{ post.created }}</small>
-                </p>
-            </div>
+              {% include "reusables/post_card.html" %}
             {% endfor %}
+
+            {%include "reusables/pagination.html"%}
         </div>
     </div>
+    
 {% endblock %}

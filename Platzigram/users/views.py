@@ -2,10 +2,13 @@
 #django 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.views.generic import DetailView
-from django.contrib.auth.models import User
+
 
 #models 
 from posts.models import Post
@@ -13,7 +16,7 @@ from posts.models import Post
 #forms 
 from users.forms import ProfileForm, signupForm
 
-class UserDetailView(DetailView):
+class UserDetailView(LoginRequiredMixin,DetailView):
     """User detail view."""
 	
     template_name='users/detail.html'

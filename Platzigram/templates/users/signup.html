@@ -12,7 +12,7 @@
           <p class="alert alert-danger"> {{error}}</p>
         {% endif %}
 
-        <form action="{% url "signup"  %}" method="post">
+        <form action="{% url 'users:signup'  %}" method="post">
             
             {% csrf_token %} <!--token for secure auntenticated -->
 

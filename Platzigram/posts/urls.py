@@ -8,14 +8,22 @@ from posts import views
 
 urlpatterns = [
 
+        # Posts
+    
+    path(
+        route='posts/<str:post_id>/',
+        view=views.PostDetailView.as_view(),
+        name='post_detail'
+    ),
+
     path(
         route='',
-        view=views.list_posts,
+        view=views.PostsFeedView.as_view(),
         name='feed',
     ),
 
     path(
-        route='posts/new/',
+        route='post/new/',
         view=views.create_post,
         name='create',
     )
