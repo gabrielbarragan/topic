@@ -7,10 +7,19 @@
 
  {% block container %}
 
-
     <div class="form-signin container px-5 py-1">
-        {% if error %}
-            <p class="alert alert-danger"> {{error}}</p>
+        
+        {% if form.errors %}
+            {% for key,error in form.errors.items %}    
+            <p class="text-danger"> 
+                *{% if key != '__all__' %}
+                      {{key}}:
+                    {% endif %}                        
+                    {%for value in error%}
+                      {{value}}
+                    {% endfor %}
+            </p>
+            {%endfor%}
         {% endif %}
 
         <form action="{% url 'users:login'  %}" method="post">
@@ -32,6 +41,8 @@
                   <input type="checkbox" value="remember-me"> Remember me
                 </label>
               </div>
+
+              <input type="hidden" name="next" value="{%url 'posts:feed' %}">
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sing in</button>
         

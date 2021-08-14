@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'platzigram.middleware.ProfileCompletionMiddleware',
+    'platzigram.middleware.UserIsAuthenticatedMiddleware',
 ]
 
 ROOT_URLCONF = 'platzigram.urls'
@@ -138,3 +139,4 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 LOGIN_URL= '/users/login/'
+LOGIN_REDIRECT_URL = '/'

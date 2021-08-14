@@ -1,14 +1,14 @@
 """users view"""
 #django 
-from django.contrib.auth import authenticate, login, logout
+
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from django.urls import reverse,reverse_lazy
-from django.shortcuts import redirect, render
-from django.views.generic import DetailView,CreateView
+from django.views.generic import DetailView
 from django.views.generic.edit import FormView, UpdateView
+from django.contrib.auth import views as auth_views
+
 
 
 #models 
@@ -16,7 +16,7 @@ from posts.models import Post
 from users.models import User, Profile
 
 #forms 
-from users.forms import ProfileForm, signupForm
+from users.forms import  signupForm
 
 class UserDetailView(LoginRequiredMixin,DetailView):
     """User detail view."""
@@ -37,34 +37,14 @@ class UserDetailView(LoginRequiredMixin,DetailView):
 
         return context
 
-def login_view(request):
-    """login view"""
+class LoginView(auth_views.LoginView):
+    """Login user view"""
     
-    if request.user.is_authenticated:
-        return redirect('posts:feed')
+    template_name = 'users/login.html'
 
-    elif request.method == 'POST':
-
-        username= request.POST['username']
-        password = request.POST['password']
-
-        user = authenticate(request,username=username, password= password)
-
-        if user:
-            login(request,user)
-            return redirect('posts:feed')
-
-        else:
-            return render(request, 'users/login.html',{ 'error': 'Invalid username and password'})
-
-    return render(request, 'users/login.html')
-
-
-@login_required
-def logout_view(request):
-    """logout a user"""
-    logout(request)
-    return redirect('users:login')
+class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
+    """Users Logout view"""
+    next_page= 'users:login'
 
 
 class SignupView(FormView):
