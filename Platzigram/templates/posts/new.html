@@ -15,7 +15,7 @@
                     {% csrf_token %}
 
                     <input type="hidden" name="user" value="{{ user.pk}}" />
-                    <input type="hidden" name="Profile" value="{{ Profile.pk }}" />
+                    <input type="hidden" name="Profile" value="{{ user.profile.pk}}" />
 
                     {# title field #}
                     <div class="form-group">
