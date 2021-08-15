@@ -11,11 +11,11 @@
     {%include "reusables/user_profile.html"%}
     
     <div class="container" id="user-posts">
-        <div class="row mt-3">
+        <div class="row g-3 mt-2">
             {% for post in posts %}
-            <div class="col-sm-4 pt-5 pb-5 pr-5 pl-5 d-flex justify-content-center align-items-center">
+            <div class="col-4 pt-5 pb-5 pr-4 pl-4 ">
                 <a href="{% url 'posts:post_detail' post.id %}" class="border">
-                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid"/>
+                    <img src="{{ post.photo.url }}" alt="{{ post.title }}" class="img-fluid mx-auto d-block"/>
                 </a>
             </div>
             {% endfor %}

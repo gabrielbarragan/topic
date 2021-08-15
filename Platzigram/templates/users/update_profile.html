@@ -27,7 +27,7 @@
       </div>
       
       <div class="col col-lg-8 col-12">
-        <div class="col-8 p-4 ml-2" id="profile-box">
+        <div class="col-8 p-4 ml-2 ms-0 w-100" id="profile-box">
 
             <form action="{% url 'users:update_profile' %}" method="POST" enctype="multipart/form-data" >
                 {% csrf_token %}
