@@ -6,6 +6,7 @@ from django.urls import reverse
 
 from users import urls
 from users.models import Profile
+from django.core.exceptions import ObjectDoesNotExist
 
 
 class ProfileCompletionMiddleware:
@@ -23,10 +24,12 @@ class ProfileCompletionMiddleware:
         """Code to be executed for each request before the view is called."""
         if not request.user.is_anonymous:
 
-            if not request.user.profile:
-                profile = Profile.objects.create(user=request.user, website='', biography='',phone_number='')
-            else:
+            try:
                 profile = request.user.profile
+                
+            except ObjectDoesNotExist:
+                profile = Profile.objects.create(user=request.user, website='', biography='',phone_number='')
+                
             
             if not profile.picture or not profile.biography:
                 if request.path not in [reverse('users:update_profile'), reverse('users:logout')]:
