@@ -1,0 +1,29 @@
+{% extends "users/base.html" %}
+
+{% block head_content %}
+    <title>ToPic signup</title>
+{% endblock %}
+
+{% block container  %}
+    
+    <main class="form-signin container ">
+
+        {% if error %}
+          <p class="alert alert-danger"> {{error}}</p>
+        {% endif %}
+
+        <form action="{% url 'users:signup'  %}" method="post">
+            
+            {% csrf_token %} <!--token for secure auntenticated -->
+
+            {{ form.as_p }}
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Register</button>
+        
+        </form>
+        <p class="mt-4">
+            Already have an account? <a href="{% url 'users:login' %}"> Login here.</a>
+        </p>
+    </main>
+
+{% endblock %}

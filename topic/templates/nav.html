@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg fixed-top" id="main-navbar">
+    <div class="container">
+        <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarTogglerDemo02">
+            
+            <ul class="navbar-nav mr-auto d-flex flex-row">
+                <li >
+                    <a href="{% url 'users:detail' request.user.username%}">
+                        {% if request.user.profile.picture %}
+                            <img src="{{ request.user.profile.picture.url }}" class="rounded-circle mb-2 border border-4" height="50" />
+                        {% else%}
+                            <img src="{% static 'img/default-profile.png' %}" class="rounded-circle mb-2 border border-4" height="50" />
+                        {% endif %}
+                    </a>
+                </li>
+                <li class="mx-3 my-3">
+                    <a  href="{% url 'posts:create' %}">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto d-flex flex-column ">
+                <li>
+                    <a class="navbar-brand pr-5" style="border-right: 1px solid #efefef;" href="{% url 'posts:feed' %}">
+                        <img src="{% static 'img/instagram.png' %}" height="45" class="d-inline-block align-top"/>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="navbar-brand">
+                        ToPic
+                    </a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav mr-auto ">
+
+                    <li class="nav-item nav-icon">
+                        <a href="{% url 'users:logout' %}">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    </li>
+
+            </ul>
+        </div>
+        
+    </div>
+</nav>

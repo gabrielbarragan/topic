@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap');
+
+html, body {
+    background: #Fafafa;
+    height: 100%;
+    width: 100%;
+    font-family: 'Questrial', sans-serif;
+}
+
+#auth-container {
+    background: #ecebeb;
+    color: black;
+    border-radius: 10px;
+}
+
+#auth-container input{
+    background-color: #e6e6e6;
+    color: #fafafa;
+}
+#auth-container a{
+    color: blue;
+}
+
+#auth-container button{
+    background-color: #DF2E2E;
+    border-color: #ad1818;
+}
+#auth-container button:hover{
+    background-color: #ad1818;
+    border-color: #ad1818;
+}
+
+#main-navbar {
+    background: #ecebeb;
+    border-bottom: 1px solid rgba(0,0,0,.0975);
+}
+
+.post-container {
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+}
+
+.nav-icon a {
+    color: #262626;
+    font-size: 1.3em;
+    display: block;
+    margin-top: .2em;
+    margin-left: 1.2em;
+    font-weight: 100;
+}
+.nav-icon a:hover {
+    color: #1d5e72;;
+}
+#profile-box {
+    background: #ecebeb;
+    border: 1px solid rgba(0,0,0,.0975);
+    border-radius: 10px;
+    margin: 0 6rem;
+   
+}
+
+#user-posts #post-thumb {
+    background: #fff;
+}
+
+

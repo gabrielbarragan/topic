@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block head_content %}
+    <title>ToPic</title>
+{% endblock%}
+
+{% block container %}
+    <div class="container">
+        <div class="row pt-4">
+            
+            {% for post in posts %}
+              {% include "reusables/post_card.html" %}
+            {% endfor %}
+
+            {%include "reusables/pagination.html"%}
+        </div>
+    </div>
+    
+{% endblock %}

@@ -1,0 +1,18 @@
+{%extends "base.html" %}
+
+{% load static %}
+
+{% block head_content %}
+<title>@{{ request.user.username }} | Update profile - ToPic</title>
+{% endblock %}
+
+{% block container %}
+
+<div class="container pt-4">
+    
+    {% include "reusables/post_card.html" %}
+
+</div>
+
+
+{% endblock %}
