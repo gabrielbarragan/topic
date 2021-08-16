@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 from users import urls
-"""Platzigram middleware"""
+"""topic middleware"""
 
 class ProfileCompletionMiddleware:
     """Profile completion middleware.
