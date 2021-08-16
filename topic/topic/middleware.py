@@ -1,8 +1,12 @@
+
+"""topic middleware"""
+
 from django.shortcuts import redirect
 from django.urls import reverse
 
 from users import urls
-"""topic middleware"""
+from users.models import Profile
+
 
 class ProfileCompletionMiddleware:
     """Profile completion middleware.
@@ -18,7 +22,12 @@ class ProfileCompletionMiddleware:
     def __call__(self, request):
         """Code to be executed for each request before the view is called."""
         if not request.user.is_anonymous:
-            profile = request.user.Profile
+
+            if not request.user.profile:
+                profile = Profile.objects.create(user=request.user, website='', biography='',phone_number='')
+            else:
+                profile = request.user.profile
+            
             if not profile.picture or not profile.biography:
                 if request.path not in [reverse('users:update_profile'), reverse('users:logout')]:
                     return redirect('users:update_profile')
