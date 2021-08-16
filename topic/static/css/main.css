@@ -15,7 +15,7 @@ html, body {
 
 #auth-container input{
     background-color: #e6e6e6;
-    color: #fafafa;
+    color: black;
 }
 #auth-container a{
     color: blue;
